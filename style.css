@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+}
+
+:root {
+    --tile-size: 100px
+}
+
+body {
+    display:flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#chess-board {
+    width: calc(var(--tile-size)*8);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tile-black {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    background-color: rgb(93, 12, 12)
+}
+
+.tile-white {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    background-color: rgb(255, 186, 101)
+}
