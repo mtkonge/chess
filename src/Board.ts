@@ -3,7 +3,7 @@ export class Board {
         this.setupBoard();
     }
 
-    setupBoard() {
+    private setupBoard() {
         const boardElement = document.querySelector<HTMLDivElement>(
             "#inside-chess-board"
         )!;
@@ -24,7 +24,7 @@ export class Board {
         this.coordinates();
     }
 
-    coordinates() {
+    private coordinates() {
         const chars = "ABCDEFGH";
         const coords = [
             document.querySelector<HTMLDivElement>("#top")!,
@@ -52,10 +52,15 @@ export class Board {
         }
     }
 
-    createTile(color: string, coordinates: string) {
+    private createTile(color: string, coordinates: string) {
         const tile = document.createElement("div")!;
         tile.className = "tile-" + color;
         tile.id = coordinates;
         return tile;
     }
+
+    private setupPieces() {
+        this.setupPawns();
+    }
+    private setupPawns() {}
 }
