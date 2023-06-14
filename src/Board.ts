@@ -1,9 +1,12 @@
-export class Board {
+import { Pawn } from "./Pawn";
+import { Tile } from "./Tile";
+
+export class BoardGraphic {
     constructor() {
-        this.setupBoard();
+        this.setupBoardGraphics();
     }
 
-    private setupBoard() {
+    private setupBoardGraphics() {
         const boardElement = document.querySelector<HTMLDivElement>(
             "#inside-chess-board"
         )!;
@@ -21,10 +24,10 @@ export class Board {
                 }
             }
         }
-        this.coordinates();
+        this.coordinatesGraphics();
     }
 
-    private coordinates() {
+    private coordinatesGraphics() {
         const chars = "ABCDEFGH";
         const coords = [
             document.querySelector<HTMLDivElement>("#top")!,
@@ -58,4 +61,6 @@ export class Board {
         tile.id = coordinates;
         return tile;
     }
+
+    public updateBoard(updatedBoard: Tile[]) {}
 }
