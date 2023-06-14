@@ -58,9 +58,4 @@ export class Board {
         tile.id = coordinates;
         return tile;
     }
-
-    private setupPieces() {
-        this.setupPawns();
-    }
-    private setupPawns() {}
 }
