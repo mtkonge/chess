@@ -1,7 +1,7 @@
 import { Piece } from "./Piece";
 
 export class Tile {
-    constructor(private position: string, private piece: Piece) {}
+    constructor(private position: string, private piece: Piece | null) {}
 
     public getPosition() {
         return this.position;

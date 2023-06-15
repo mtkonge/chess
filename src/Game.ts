@@ -1,12 +1,6 @@
-import { Bishop } from "./Bishop";
-import { BoardGraphic } from "./Board";
+import { BoardGraphic } from "./BoardGraphic";
 import { coordinate } from "./Coordinate";
-import { King } from "./King";
-import { Knight } from "./Knight";
-import { NoPiece } from "./NoPiece";
-import { Pawn } from "./Pawn";
-import { Queen } from "./Queen";
-import { Rook } from "./Rook";
+import { Piece } from "./Piece";
 import { Tile } from "./Tile";
 
 export class Game {
@@ -34,45 +28,45 @@ export class Game {
         if (this.tileShouldBePiece(y)) {
             this.boardLogic.push(this.setupPiece(x, y));
         } else {
-            this.boardLogic.push(new Tile(coordinate(x, y), new NoPiece()));
+            this.boardLogic.push(new Tile(coordinate(x, y), null));
         }
     }
     private setupPiece(x: string, y: number) {
         if (y === 2) {
-            return new Tile(coordinate(x, y), new Pawn("w"));
+            return new Tile(coordinate(x, y), new Piece("white", "Pawn"));
         } else if (y === 7) {
-            return new Tile(coordinate(x, y), new Pawn("b"));
+            return new Tile(coordinate(x, y), new Piece("black", "Pawn"));
         } else if (x == "A" || x == "H") {
             if (y == 8) {
-                return new Tile(coordinate(x, y), new Rook("b"));
+                return new Tile(coordinate(x, y), new Piece("black", "Rook"));
             } else {
-                return new Tile(coordinate(x, y), new Rook("w"));
+                return new Tile(coordinate(x, y), new Piece("white", "Rook"));
             }
         } else if (x == "B" || x == "G") {
             if (y == 8) {
-                return new Tile(coordinate(x, y), new Knight("b"));
+                return new Tile(coordinate(x, y), new Piece("black", "Knight"));
             } else {
-                return new Tile(coordinate(x, y), new Knight("w"));
+                return new Tile(coordinate(x, y), new Piece("white", "Knight"));
             }
         } else if (x == "C" || x == "F") {
             if (y == 8) {
-                return new Tile(coordinate(x, y), new Bishop("b"));
+                return new Tile(coordinate(x, y), new Piece("black", "Bishop"));
             } else {
-                return new Tile(coordinate(x, y), new Bishop("w"));
+                return new Tile(coordinate(x, y), new Piece("white", "Bishop"));
             }
         } else if (x == "D") {
             if (y == 8) {
-                return new Tile(coordinate(x, y), new Queen("b"));
+                return new Tile(coordinate(x, y), new Piece("black", "Queen"));
             } else {
-                return new Tile(coordinate(x, y), new Queen("w"));
+                return new Tile(coordinate(x, y), new Piece("white", "Queen"));
             }
         } else if (x == "E") {
             if (y == 8) {
-                return new Tile(coordinate(x, y), new King("b"));
+                return new Tile(coordinate(x, y), new Piece("black", "King"));
             } else {
-                return new Tile(coordinate(x, y), new King("w"));
+                return new Tile(coordinate(x, y), new Piece("white", "King"));
             }
         }
-        return new Tile(coordinate(x, y), new NoPiece());
+        return new Tile(coordinate(x, y), null);
     }
 }

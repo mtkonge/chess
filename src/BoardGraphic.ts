@@ -65,18 +65,15 @@ export class BoardGraphic {
     }
 
     public updateBoard(updatedBoard: Tile[]) {
-        let currentTile: HTMLDivElement;
-        console.log(updatedBoard);
         for (let i = 0; i < updatedBoard.length; i++) {
-            currentTile = document.querySelector(
+            const currentPiece = updatedBoard[i].getPiece();
+            if (!currentPiece) {
+                continue;
+            }
+            const currentTile = document.querySelector(
                 "#" + updatedBoard[i].getPosition()
             )!;
-            console.log(i);
-
-            console.log(updatedBoard[i].getPosition());
-            currentTile.querySelector("img")!.src = updatedBoard[i]
-                .getPiece()
-                .getIconPath();
+            currentTile.querySelector("img")!.src = currentPiece.getIconPath();
         }
     }
 }
