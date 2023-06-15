@@ -27,13 +27,13 @@ body {
 .tile-black {
     width: var(--tile-size);
     height: var(--tile-size);
-    background-color: rgb(60, 10, 10)
+    background-color: rgb(130, 90, 80)
 }
 
 .tile-white {
     width: var(--tile-size);
     height: var(--tile-size);
-    background-color: rgb(255, 186, 101)
+    background-color: rgb(255, 190, 100)
 }
 
 h3 {

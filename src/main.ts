@@ -1,7 +1,7 @@
+import { Game } from "./Game";
 import "./style.css";
-import { BoardGraphic } from "./Board";
 
 function main() {
-    const board = new BoardGraphic();
+    const game = new Game();
 }
 main();

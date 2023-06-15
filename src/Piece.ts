@@ -1,9 +1,10 @@
 export class Piece {
-    protected position: Coordinate;
-    protected color: "w" | "b";
-    protected iconPath: string = "./public/";
-    constructor(position: Coordinate, color: "w" | "b") {
+    protected color: "w" | "b" | "";
+    protected iconPath: string = "";
+    constructor(color: "w" | "b" | "") {
         this.color = color;
-        this.position = position;
+    }
+    public getIconPath() {
+        return this.iconPath;
     }
 }

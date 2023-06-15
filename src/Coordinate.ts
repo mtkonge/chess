@@ -1,8 +1,3 @@
-class Coordinate {
-    public x: string;
-    public y: string;
-    constructor(x: string, y: string) {
-        this.x = x;
-        this.y = y;
-    }
+export function coordinate(x: string, y: number) {
+    return x + y.toString();
 }
