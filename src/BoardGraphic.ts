@@ -64,14 +64,15 @@ export class BoardGraphic {
         return tile;
     }
 
-    public updateBoard(updatedBoard: Tile[]) {
-        for (let i = 0; i < updatedBoard.length; i++) {
-            const currentPiece = updatedBoard[i].getPiece();
+    public updateBoard(board: Tile[]) {
+        for (let i = 0; i < board.length; i++) {
+            const currentPiece = board[i].value;
+            console.log(currentPiece);
             if (!currentPiece) {
                 continue;
             }
             const currentTile = document.querySelector(
-                "#" + updatedBoard[i].getPosition()
+                "#" + board[i].getPosition()
             )!;
             currentTile.querySelector("img")!.src = currentPiece.getIconPath();
         }
