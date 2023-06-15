@@ -1,10 +1,13 @@
 import { Board } from "./Board";
-import { BoardGraphic } from "./BoardGraphic";
+import { Graphic } from "./BoardGraphic";
 
 export class Game {
+    private playerTurn: "white" | "black" = "white";
     private boardLogic = new Board();
-    private boardGraphic: BoardGraphic;
+    private boardGraphic = new Graphic();
     constructor() {
-        this.boardGraphic = new BoardGraphic(this.boardLogic.getTiles());
+        this.boardLogic.render(this.boardGraphic);
     }
+
+    turn() {}
 }

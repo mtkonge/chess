@@ -2,17 +2,24 @@ import { coordinate } from "./Coordinate";
 import { Piece } from "./Piece";
 import { Tile } from "./Tile";
 
+export interface BoardRenderer {
+    renderBoard(board: Tile[]): void;
+}
+
 export class Board {
     private tiles: Tile[] = [];
 
     constructor() {
         this.setupTiles();
-        this.reset();
     }
 
     public getTiles() {
         // for testing, delete later
         return this.tiles;
+    }
+
+    public render(renderer: BoardRenderer) {
+        renderer.renderBoard(this.tiles);
     }
 
     setupTiles() {
@@ -22,12 +29,7 @@ export class Board {
                 this.setupTile(x, y);
             }
         }
-        console.log(this.tiles);
     }
-
-    public render(renderer: BoardRenderer) {}
-
-    public reset() {}
 
     private tileShouldBePiece(y: number) {
         return y > 6 || y < 3;
@@ -79,8 +81,4 @@ export class Board {
         }
         return new Tile(coordinate(x, y), null);
     }
-}
-
-interface BoardRenderer {
-    (board: (Piece | null)[]): void;
 }

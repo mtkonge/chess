@@ -1,11 +1,8 @@
+import { BoardRenderer } from "./Board";
 import { Tile } from "./Tile";
 
-export class BoardGraphic {
-    constructor(boardSetup: Tile[]) {
-        this.setupBoardGraphics(boardSetup);
-    }
-
-    private setupBoardGraphics(boardSetup: Tile[]) {
+export class Graphic implements BoardRenderer {
+    public renderBoard(boardSetup: Tile[]) {
         const boardElement = document.querySelector<HTMLDivElement>(
             "#inside-chess-board"
         )!;
@@ -55,11 +52,34 @@ export class BoardGraphic {
         }
     }
 
+    private onDragStart(event: DragEvent, tileImg: HTMLImageElement) {
+        console.log("drag started");
+        tileImg.classList.add("dragging");
+    }
+
+    private onDragEnd(tileImg: HTMLImageElement) {
+        console.log("drag ended");
+
+        tileImg.classList.remove("dragging");
+    }
+
+    private onDragEnter(event: DragEvent, tile: HTMLDivElement) {}
+
+    private onDrop(event: DragEvent) {
+        event.preventDefault();
+    }
+
     private createTile(color: string, coordinates: string) {
         const tile = document.createElement("div")!;
         tile.className = "tile-" + color;
         tile.id = coordinates;
+        tile.addEventListener("drop", (event: DragEvent) => this.onDrop(event));
         const tileImg = document.createElement("img");
+        tileImg.draggable = true;
+        tileImg.addEventListener("dragstart", (event: DragEvent) =>
+            this.onDragStart(event, tileImg)
+        );
+        tileImg.addEventListener("dragend", () => this.onDragEnd(tileImg));
         tile.append(tileImg);
         return tile;
     }
@@ -67,7 +87,6 @@ export class BoardGraphic {
     public updateBoard(board: Tile[]) {
         for (let i = 0; i < board.length; i++) {
             const currentPiece = board[i].value;
-            console.log(currentPiece);
             if (!currentPiece) {
                 continue;
             }
