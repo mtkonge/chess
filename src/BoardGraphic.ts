@@ -52,34 +52,42 @@ export class Graphic implements BoardRenderer {
         }
     }
 
-    private onDragStart(event: DragEvent, tileImg: HTMLImageElement) {
-        console.log("drag started");
-        tileImg.classList.add("dragging");
-    }
-
-    private onDragEnd(tileImg: HTMLImageElement) {
-        console.log("drag ended");
-
-        tileImg.classList.remove("dragging");
-    }
-
-    private onDragEnter(event: DragEvent, tile: HTMLDivElement) {}
-
-    private onDrop(event: DragEvent) {
+    private dragEnter(event: DragEvent) {
         event.preventDefault();
+    }
+
+    private dragOver(event: DragEvent) {
+        event.preventDefault();
+    }
+
+    private dropTile(event: DragEvent) {
+        event.preventDefault();
+
+        const draggedId = event.dataTransfer!.getData("text/plain");
+        const draggedElement = document.getElementById(draggedId)!;
+        const target = event.target as HTMLDivElement;
+        target.appendChild(draggedElement);
+    }
+    private dragStart(event: DragEvent) {
+        const target = event.target as HTMLImageElement;
+        event.dataTransfer!.setData("Text", target.id); //check datatransfer for null?
     }
 
     private createTile(color: string, coordinates: string) {
         const tile = document.createElement("div")!;
         tile.className = "tile-" + color;
         tile.id = coordinates;
-        tile.addEventListener("drop", (event: DragEvent) => this.onDrop(event));
         const tileImg = document.createElement("img");
         tileImg.draggable = true;
-        tileImg.addEventListener("dragstart", (event: DragEvent) =>
-            this.onDragStart(event, tileImg)
+        tileImg.id = color + coordinates;
+        tile.addEventListener("dragenter", (ev: DragEvent) =>
+            this.dragEnter(ev)
         );
-        tileImg.addEventListener("dragend", () => this.onDragEnd(tileImg));
+        tile.addEventListener("dragover", (ev: DragEvent) => this.dragOver(ev));
+        tile.addEventListener("drop", (ev: DragEvent) => this.dropTile(ev));
+        tileImg.addEventListener("dragstart", (ev: DragEvent) =>
+            this.dragStart(ev)
+        );
         tile.append(tileImg);
         return tile;
     }
