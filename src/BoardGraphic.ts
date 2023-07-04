@@ -63,14 +63,17 @@ export class Graphic implements BoardRenderer {
     private dropTile(event: DragEvent) {
         event.preventDefault();
 
-        const draggedId = event.dataTransfer!.getData("text/plain");
-        const draggedElement = document.getElementById(draggedId)!;
-        const target = event.target as HTMLDivElement;
+        const draggedId = event.dataTransfer!.getData("draggedId");
+        const draggedElement = document.querySelector<HTMLImageElement>(
+            "#" + draggedId
+        )!;
+        const target = event.currentTarget as HTMLDivElement;
+        target.innerHTML = "";
         target.appendChild(draggedElement);
     }
     private dragStart(event: DragEvent) {
         const target = event.target as HTMLImageElement;
-        event.dataTransfer!.setData("Text", target.id); //check datatransfer for null?
+        event.dataTransfer!.setData("draggedId", target.id);
     }
 
     private createTile(color: string, coordinates: string) {
@@ -85,7 +88,7 @@ export class Graphic implements BoardRenderer {
         );
         tile.addEventListener("dragover", (ev: DragEvent) => this.dragOver(ev));
         tile.addEventListener("drop", (ev: DragEvent) => this.dropTile(ev));
-        tileImg.addEventListener("dragstart", (ev: DragEvent) =>
+        tile.addEventListener("dragstart", (ev: DragEvent) =>
             this.dragStart(ev)
         );
         tile.append(tileImg);
